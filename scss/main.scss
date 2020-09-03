@@ -104,14 +104,8 @@ body {
   margin: 7rem auto 0;
   position: relative;
   display: flex;
-  align-items: center;
   border-radius: 7rem;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  color: white;
-  flex-direction: column;
-  font-size: 2rem;
-  padding: 5rem;
-  text-align: center;
   animation: moveInBottom 0.5s ease-out 0.25s;
   animation-fill-mode: backwards;
 }
