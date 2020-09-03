@@ -65,6 +65,7 @@ body {
     border-radius: 3rem;
     padding: 1rem; }
   .header--jimmy-impact {
+    text-transform: uppercase;
     color: #1e2533;
     margin-bottom: 2rem; }
   .header--button {
@@ -124,8 +125,7 @@ body {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   color: white;
   flex-direction: column;
-  font-size: 2rem;
-  padding: 5rem;
+  padding: 5rem 10rem;
   text-align: center;
   animation: moveInTop 0.5s ease-out 0.25s;
   animation-fill-mode: backwards; }
@@ -135,6 +135,7 @@ body {
     text-transform: uppercase;
     text-decoration: underline #75e0bc; }
   .instructions p {
+    font-size: 2rem;
     margin-bottom: 10rem; }
   .instructions--button {
     background-color: #ff5532;
