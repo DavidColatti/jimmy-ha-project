@@ -7,7 +7,7 @@
     <title>Jimmy</title>
   </head>
   <body>
-    <section class="header no-show">
+    <section class="header">
       <div class="header__play-section">
         <h1 class="header--title">
           Become an influential leader
@@ -41,7 +41,18 @@
       </p>
       <button class="instructions--button">Play Now !</button>
     </section>
-    <canvas id="canvas" class=""></canvas>
+    <canvas id="canvas" class="no-show"></canvas>
+    <section class="score no-show">
+      <h3 class="score--title">
+        Paper Balls Left: <span class="paper-ball-amount">50</span>
+      </h3>
+      <h3 class="score--title">
+        Health: <span class="health-amount">100</span>
+      </h3>
+      <h3 class="score--title">
+        LDP Modules Collected: <span class="ldp-modules-amount">0</span>
+      </h3>
+    </section>
   </body>
   <script src="js/main.js"></script>
 </html>
