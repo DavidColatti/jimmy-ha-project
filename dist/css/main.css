@@ -1,3 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;700&display=swap");
+@keyframes moveInBottom {
+  /* Initial state */
+  0% {
+    opacity: 0;
+    transform: translateY(3rem); }
+  /* Ending state */
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
+@keyframes moveInTop {
+  /* Initial state */
+  0% {
+    opacity: 0;
+    transform: translateY(-3rem); }
+  /* Ending state */
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+
 *,
 *::after,
 *::before {
@@ -10,4 +31,132 @@ html {
   font-size: 62.5%; }
 
 body {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  background: url(../img/background.png) fixed;
+  background-size: cover;
+  background-position: top;
+  font-family: "Roboto"; }
+
+.header {
+  height: 75vh;
+  width: 70%;
+  background: url(../img/header-content-bg.png) fixed;
+  background-size: cover;
+  background-position: top;
+  margin: 7rem auto 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+  .header__play-section {
+    text-align: center;
+    font-size: 1.7rem;
+    margin-right: 25%;
+    width: 50%; }
+  .header--title {
+    color: white;
+    text-decoration: underline #75e0bc;
+    font-size: 5rem;
+    margin-bottom: 7rem; }
+  .header__jimmy-section {
+    background-color: white;
+    border-radius: 3rem;
+    padding: 1rem; }
+  .header--jimmy-impact {
+    color: #1e2533;
+    margin-bottom: 2rem; }
+  .header--button {
+    background-color: #ff5532;
+    width: 15rem;
+    height: 5rem;
+    border-radius: 3rem;
+    color: white;
+    font-weight: 900;
+    font-size: 2rem;
+    text-transform: uppercase;
+    border: none;
+    transition: all 0.2s;
+    outline: none;
+    cursor: pointer; }
+    .header--button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .header--button:active {
+      transform: translateY(-1px);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+  .header--button-animation {
+    animation: moveInBottom 0.5s ease-out 0.25s;
+    animation-fill-mode: backwards; }
+
+#canvas {
+  background: url(../img/office-background.png);
+  background-size: cover;
+  background-position: bottom;
+  height: 75vh;
+  width: 70%;
+  margin: 7rem auto 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 7rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  color: white;
+  flex-direction: column;
+  font-size: 2rem;
+  padding: 5rem;
+  text-align: center;
+  animation: moveInBottom 0.5s ease-out 0.25s;
+  animation-fill-mode: backwards; }
+
+.instructions {
+  background-image: linear-gradient(to right bottom, #060441ef, #060441b4), url(../img/kitchen-bg.png);
+  background-size: cover;
+  background-position: bottom;
+  height: 75vh;
+  width: 70%;
+  margin: 7rem auto 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 7rem;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  color: white;
+  flex-direction: column;
+  font-size: 2rem;
+  padding: 5rem;
+  text-align: center;
+  animation: moveInTop 0.5s ease-out 0.25s;
+  animation-fill-mode: backwards; }
+  .instructions h2 {
+    margin-bottom: 3rem;
+    font-size: 4rem;
+    text-transform: uppercase;
+    text-decoration: underline #75e0bc; }
+  .instructions p {
+    margin-bottom: 10rem; }
+  .instructions--button {
+    background-color: #ff5532;
+    width: 15rem;
+    height: 5rem;
+    border-radius: 3rem;
+    color: white;
+    font-weight: 900;
+    font-size: 2rem;
+    text-transform: uppercase;
+    border: none;
+    transition: all 0.2s;
+    outline: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 40px; }
+    .instructions--button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem rgba(255, 255, 255, 0.2); }
+    .instructions--button:active {
+      transform: translateY(-1px);
+      box-shadow: 0 0.5rem 1rem rgba(255, 255, 255, 0.2); }
+
+.no-show {
+  display: none !important; }

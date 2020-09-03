@@ -1,6 +1,36 @@
 $primary-color: #444;
 $secondary-color: #eece1a;
+$text-color: #1e2533;
+$button-color: #ff5532;
 
 @mixin easeOut {
   transition: all 0.5s ease-out;
+}
+
+@keyframes moveInBottom {
+  /* Initial state */
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  /* Ending state */
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInTop {
+  /* Initial state */
+  0% {
+    opacity: 0;
+    transform: translateY(-3rem);
+  }
+
+  /* Ending state */
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
