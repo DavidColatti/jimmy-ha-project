@@ -25,6 +25,10 @@ instructionBtn.addEventListener("click", () => {
   instructionSection.classList.add("no-show");
   canvas.classList.remove("no-show");
   scoreSection.classList.remove("no-show");
+
+  setTimeout(() => {
+    startGame();
+  }, 5000);
 });
 
 const startGame = () => {
@@ -297,7 +301,3 @@ const startGame = () => {
 
   window.requestAnimationFrame(animate);
 };
-
-setTimeout(() => {
-  startGame();
-}, 7000);

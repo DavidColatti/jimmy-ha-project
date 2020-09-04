@@ -188,6 +188,20 @@ body {
   align-items: center;
 }
 
+.mute-on {
+  font-size: 50px;
+  position: fixed;
+  background-color: $button-color;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  left: 2rem;
+  color: white;
+}
+
 .no-show {
   display: none !important;
 }
