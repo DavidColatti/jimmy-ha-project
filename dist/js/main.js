@@ -28,7 +28,7 @@ instructionBtn.addEventListener("click", () => {
 
   setTimeout(() => {
     startGame();
-  }, 5000);
+  }, 4000);
 });
 
 const startGame = () => {
@@ -139,6 +139,126 @@ const startGame = () => {
     });
   };
 
+  //CPU FEMALE SPRITE
+  const femaleSpriteImage = new Image();
+  femaleSpriteImage.src = "img/worker-female-sprite.png";
+
+  const femaleWorkers = [];
+  setInterval(function () {
+    let femaleWorkerObj = {
+      x: -1,
+      y: Math.floor(Math.random() * 30) + 100,
+      w: 30.5,
+      h: 31.5,
+      health: 50,
+      str: 15,
+      hitTimes: 1,
+      spriteX: 0,
+      spriteY: 704,
+      alive: true,
+    };
+
+    if (femaleWorkerObj.health <= 0) {
+      femaleWorkerObj.alive = false;
+    }
+
+    femaleWorkers.push(femaleWorkerObj);
+  }, 6000);
+
+  const drawFemaleWorkers = () => {
+    femaleWorkers.forEach((femaleWorker, index) => {
+      if (femaleWorker.spriteX >= 512 && femaleWorker.health > 0) {
+        femaleWorker.spriteX = 0;
+      }
+
+      ctx.fillStyle = "red";
+      ctx.fillRect(femaleWorker.x, femaleWorker.y, 30, 3);
+      ctx.fillStyle = "lightgreen";
+
+      if (femaleWorker.health <= 0) {
+        femaleWorker.health = 0;
+      }
+      ctx.fillRect(
+        femaleWorker.x,
+        femaleWorker.y,
+        (femaleWorker.health / 50) * 30,
+        3
+      );
+
+      if (femaleWorker.health > 0) {
+        femaleWorker.x += 1;
+        femaleWorker.spriteX += 64;
+      }
+      if (femaleWorker.health <= 0 && femaleWorker.spriteX != 320) {
+        femaleWorker.spriteX += 64;
+      }
+
+      ctx.drawImage(
+        femaleSpriteImage,
+        femaleWorker.spriteX,
+        femaleWorker.spriteY,
+        64,
+        64,
+        femaleWorker.x,
+        femaleWorker.y,
+        femaleWorker.w,
+        femaleWorker.h
+      );
+
+      detectFemaleWorkerCollision(femaleWorker, index); //collision with male worker
+      detectPaperFemaleWorkerCollision(femaleWorker, index); // collision with paper
+    });
+  };
+
+  //COLLISION ON MALE WORKER
+  const detectFemaleWorkerCollision = (worker, index) => {
+    //detect collision between femaleWorkers and jimmy
+    if (
+      worker.x < jimmyObj.x + jimmyObj.w &&
+      worker.x + worker.w - 15 > jimmyObj.x + 15 &&
+      worker.y < jimmyObj.y + jimmyObj.h &&
+      worker.y + worker.h > jimmyObj.y
+    ) {
+      if (worker.hitTimes > 0) {
+        console.log("WORKER HURT ME!");
+
+        jimmyObj.health -= worker.str;
+        healthAmount.innerText = `${jimmyObj.health}`;
+        worker.hitTimes--;
+        if (jimmyObj.health <= 0) {
+          jimmyObj.health = 0;
+          healthAmount.innerText = `${jimmyObj.health}`;
+        }
+      }
+    }
+    if (worker.x > canvas.width) {
+      femaleWorkers.splice(index, 1);
+    }
+  };
+
+  //COLLISION ON PAPER AND FEMALE WORKER
+  const detectPaperFemaleWorkerCollision = (worker, i) => {
+    paperBalls.forEach((paperBall, index) => {
+      if (
+        worker.x < paperBall.x + paperBall.w &&
+        worker.x + worker.w > paperBall.x &&
+        worker.y < paperBall.y + paperBall.h &&
+        worker.y + worker.h > paperBall.y
+      ) {
+        console.log("paper hit worker");
+        worker.health -= jimmyObj.str;
+        paperBalls.splice(index, 1);
+        if (worker.health <= 0) {
+          worker.spriteX = 0;
+          worker.spriteY = 1280;
+          setTimeout(() => {
+            femaleWorkers.splice(i, 1);
+          }, 200);
+        }
+      }
+    });
+  };
+
   // CPU MALE SPRITE
   const maleSpriteImage = new Image();
   maleSpriteImage.src = "img/worker-male-sprite.png";
@@ -238,12 +358,12 @@ const startGame = () => {
 
   //COLLISION ON PAPER AND MALE WORKER
   const detectPaperMaleWorkerCollision = (worker, i) => {
-    paperBalls.forEach((arrow, index) => {
+    paperBalls.forEach((paperBall, index) => {
       if (
-        worker.x < arrow.x + arrow.w &&
-        worker.x + worker.w > arrow.x &&
-        worker.y < arrow.y + arrow.h &&
-        worker.y + worker.h > arrow.y
+        worker.x < paperBall.x + paperBall.w &&
+        worker.x + worker.w > paperBall.x &&
+        worker.y < paperBall.y + paperBall.h &&
+        worker.y + worker.h > paperBall.y
       ) {
         console.log("paper hit worker");
         worker.health -= jimmyObj.str;
@@ -251,7 +371,7 @@ const startGame = () => {
         if (worker.health <= 0) {
           worker.spriteX = 0;
           worker.spriteY = 1280;
-          setTimeout(function () {
+          setTimeout(() => {
             maleWorkers.splice(i, 1);
           }, 200);
         }
@@ -289,7 +409,6 @@ const startGame = () => {
   };
 
   // ANIMATE FUNCTION
-
   const animate = () => {
     animateId = window.requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height); //Clears Everything
@@ -297,6 +416,7 @@ const startGame = () => {
     drawJimmy();
     drawPaperBalls();
     drawMaleWorkers();
+    drawFemaleWorkers();
   };
 
   window.requestAnimationFrame(animate);
