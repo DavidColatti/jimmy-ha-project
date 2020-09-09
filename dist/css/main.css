@@ -170,5 +170,28 @@ body {
   font-size: 1.5rem;
   align-items: center; }
 
+.back-to-home-btn {
+  position: absolute;
+  bottom: 20rem;
+  width: 30rem;
+  border: none;
+  font-weight: 900;
+  outline: none;
+  cursor: pointer;
+  font-size: 2rem;
+  background-color: #ff5532;
+  left: calc(50% - 15rem);
+  border-radius: 3rem;
+  height: 5rem;
+  color: white;
+  animation: moveInBottom 0.5s ease-out 0.25s;
+  animation-fill-mode: backwards; }
+  .back-to-home-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .back-to-home-btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+
 .no-show {
   display: none !important; }

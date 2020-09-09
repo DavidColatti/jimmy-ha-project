@@ -9,7 +9,8 @@ const scoreSection = document.querySelector(".score");
 const healthAmount = document.querySelector(".health-amount");
 const paperBallAmount = document.querySelector(".paper-ball-amount");
 const ldpModulesAmount = document.querySelector(".ldp-modules-amount");
-let gameStart = false;
+const backToHomeBtn = document.querySelector(".back-to-home-btn");
+let wonGame;
 let animateId;
 
 // Event Listeners
@@ -31,6 +32,10 @@ instructionBtn.addEventListener("click", () => {
   }, 4000);
 });
 
+backToHomeBtn.addEventListener("click", () => {
+  window.location.reload();
+});
+
 const startGame = () => {
   // JIM Sprite
   const jimmyImage = new Image();
@@ -43,11 +48,14 @@ const startGame = () => {
     h: 35.5,
     health: 100,
     str: 25,
-    paperAmount: 50,
+    paperAmount: 80,
     spriteX: 0,
     spriteY: 640,
     alive: true,
     shoot: false,
+    greenStar: 0,
+    orangeStar: 0,
+    blueStar: 0,
   };
 
   if (jimmyObj.health <= 0) {
@@ -65,7 +73,6 @@ const startGame = () => {
       jimmyObj.spriteX < 768 &&
       jimmyObj.paperAmount > 0
     ) {
-      console.log(jimmyObj.shoot);
       jimmyObj.spriteX += 64;
     } else if (jimmyObj.shoot === true && jimmyObj.spriteX < 768) {
       jimmyObj.shoot = false;
@@ -228,6 +235,8 @@ const startGame = () => {
         if (jimmyObj.health <= 0) {
           jimmyObj.health = 0;
           healthAmount.innerText = `${jimmyObj.health}`;
+          wonGame = false;
+          gameOver();
         }
       }
     }
@@ -348,6 +357,8 @@ const startGame = () => {
         if (jimmyObj.health <= 0) {
           jimmyObj.health = 0;
           healthAmount.innerText = `${jimmyObj.health}`;
+          wonGame = false;
+          gameOver();
         }
       }
     }
@@ -377,6 +388,177 @@ const startGame = () => {
         }
       }
     });
+  };
+
+  // STAR (GREEN)
+  const greenStarImage = new Image();
+  greenStarImage.src = "img/green-star.png";
+
+  const greenStars = [];
+  setInterval(function () {
+    let greenStarObj = {
+      x: Math.random() * 300,
+      y: -1,
+      w: 10,
+      h: 10,
+      amount: 1,
+    };
+
+    greenStars.push(greenStarObj);
+  }, 7000);
+
+  const drawGreenStars = () => {
+    greenStars.forEach((star, index) => {
+      ctx.drawImage(greenStarImage, star.x, star.y++, star.w, star.h);
+      detectGreenStarCollision(star, index);
+    });
+  };
+
+  //COLLISION ON GREEN STAR
+  const detectGreenStarCollision = (star, index) => {
+    if (
+      star.x < jimmyObj.x + jimmyObj.w &&
+      star.x + star.w > jimmyObj.x &&
+      star.y < jimmyObj.y + jimmyObj.h &&
+      star.y + star.h > jimmyObj.y
+    ) {
+      jimmyObj.greenStar++;
+      ldpModulesAmount.innerText =
+        jimmyObj.greenStar + jimmyObj.orangeStar + jimmyObj.blueStar;
+      greenStars.splice(index, 1);
+
+      if (
+        jimmyObj.greenStar >= 3 &&
+        jimmyObj.blueStar >= 3 &&
+        jimmyObj.orangeStar >= 3
+      ) {
+        wonGame = true;
+        gameOver();
+      } else if (jimmyObj.health <= 0) {
+        wonGame = false;
+        gameOver();
+      }
+    }
+  };
+
+  // STAR (ORANGE)
+  const orangeStarImage = new Image();
+  orangeStarImage.src = "img/orange-star.png";
+
+  const orangeStars = [];
+  setInterval(function () {
+    let orangeStarObj = {
+      x: Math.random() * 300,
+      y: -1,
+      w: 10,
+      h: 10,
+      amount: 1,
+    };
+
+    orangeStars.push(orangeStarObj);
+  }, 9000);
+
+  const drawOrangeStars = () => {
+    orangeStars.forEach((star, index) => {
+      ctx.drawImage(orangeStarImage, star.x, star.y++, star.w, star.h);
+      detectOrangeStarCollision(star, index);
+    });
+  };
+
+  //COLLISION ON ORANGE STAR
+  const detectOrangeStarCollision = (star, index) => {
+    if (
+      star.x < jimmyObj.x + jimmyObj.w &&
+      star.x + star.w > jimmyObj.x &&
+      star.y < jimmyObj.y + jimmyObj.h &&
+      star.y + star.h > jimmyObj.y
+    ) {
+      jimmyObj.orangeStar++;
+      ldpModulesAmount.innerText =
+        jimmyObj.greenStar + jimmyObj.orangeStar + jimmyObj.blueStar;
+      orangeStars.splice(index, 1);
+
+      if (
+        jimmyObj.greenStar >= 3 &&
+        jimmyObj.blueStar >= 3 &&
+        jimmyObj.orangeStar >= 3
+      ) {
+        wonGame = true;
+        gameOver();
+      } else if (jimmyObj.health <= 0) {
+        wonGame = false;
+        gameOver();
+      }
+    }
+  };
+
+  // STAR (BLUE)
+  const blueStarImage = new Image();
+  blueStarImage.src = "img/blue-star.png";
+
+  const blueStars = [];
+  setInterval(function () {
+    let blueStarObj = {
+      x: Math.random() * 300,
+      y: -1,
+      w: 10,
+      h: 10,
+      amount: 1,
+    };
+
+    blueStars.push(blueStarObj);
+  }, 10000);
+
+  const drawBlueStars = () => {
+    blueStars.forEach((star, index) => {
+      ctx.drawImage(blueStarImage, star.x, star.y++, star.w, star.h);
+      detectBlueStarCollision(star, index);
+    });
+  };
+
+  //COLLISION ON BLUE STAR
+  const detectBlueStarCollision = (star, index) => {
+    if (
+      star.x < jimmyObj.x + jimmyObj.w &&
+      star.x + star.w > jimmyObj.x &&
+      star.y < jimmyObj.y + jimmyObj.h &&
+      star.y + star.h > jimmyObj.y
+    ) {
+      jimmyObj.blueStar++;
+      ldpModulesAmount.innerText =
+        jimmyObj.greenStar + jimmyObj.blueStar + jimmyObj.blueStar;
+      blueStars.splice(index, 1);
+      if (
+        jimmyObj.greenStar >= 3 &&
+        jimmyObj.blueStar >= 3 &&
+        jimmyObj.orangeStar >= 3
+      ) {
+        wonGame = true;
+        gameOver();
+      } else if (jimmyObj.health <= 0) {
+        wonGame = false;
+        gameOver();
+      }
+    }
+  };
+
+  // GAME OVER FUNCTION
+  const gameOver = () => {
+    window.cancelAnimationFrame(animateId);
+    backToHomeBtn.classList.remove("no-show");
+    ctx.clearRect(0, 0, canvas.width, canvas.height); //Clears Everything
+    gameResults();
+  };
+
+  // GAME RESULTS
+  const gameResults = () => {
+    if (wonGame) {
+      console.log("won game");
+      // canvas.style.backgroundImage = 'url(./Img/VictoryBackground.png)';
+    } else {
+      console.log("lost game");
+      // canvas.style.backgroundImage = 'url(./Img/DefeatBackground.png)';
+    }
   };
 
   // MOVEMENT KEYS
@@ -417,6 +599,9 @@ const startGame = () => {
     drawPaperBalls();
     drawMaleWorkers();
     drawFemaleWorkers();
+    drawBlueStars();
+    drawGreenStars();
+    drawOrangeStars();
   };
 
   window.requestAnimationFrame(animate);
