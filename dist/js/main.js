@@ -552,12 +552,14 @@ const startGame = () => {
 
   // GAME RESULTS
   const gameResults = () => {
+    canvas.style.transition = "2s";
+
     if (wonGame) {
       console.log("won game");
-      // canvas.style.backgroundImage = 'url(./Img/VictoryBackground.png)';
+      canvas.style.backgroundImage = "url(img/winner-bg.png)";
     } else {
       console.log("lost game");
-      // canvas.style.backgroundImage = 'url(./Img/DefeatBackground.png)';
+      canvas.style.backgroundImage = "url(img/loser-bg.png)";
     }
   };
 
