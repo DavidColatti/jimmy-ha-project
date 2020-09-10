@@ -8,7 +8,9 @@ const playNowSection = document.querySelector(".header__play-section");
 const scoreSection = document.querySelector(".score");
 const healthAmount = document.querySelector(".health-amount");
 const paperBallAmount = document.querySelector(".paper-ball-amount");
-const ldpModulesAmount = document.querySelector(".ldp-modules-amount");
+const ldpBlueAmount = document.querySelector(".ldp-blue-amount");
+const ldpGreenAmount = document.querySelector(".ldp-green-amount");
+const ldpOrangeAmount = document.querySelector(".ldp-orange-amount");
 const backToHomeBtn = document.querySelector(".back-to-home-btn");
 let wonGame;
 let animateId;
@@ -423,8 +425,7 @@ const startGame = () => {
       star.y + star.h > jimmyObj.y
     ) {
       jimmyObj.greenStar++;
-      ldpModulesAmount.innerText =
-        jimmyObj.greenStar + jimmyObj.orangeStar + jimmyObj.blueStar;
+      ldpGreenAmount.innerText = jimmyObj.greenStar;
       greenStars.splice(index, 1);
 
       if (
@@ -474,8 +475,7 @@ const startGame = () => {
       star.y + star.h > jimmyObj.y
     ) {
       jimmyObj.orangeStar++;
-      ldpModulesAmount.innerText =
-        jimmyObj.greenStar + jimmyObj.orangeStar + jimmyObj.blueStar;
+      ldpOrangeAmount.innerText = jimmyObj.orangeStar;
       orangeStars.splice(index, 1);
 
       if (
@@ -525,8 +525,7 @@ const startGame = () => {
       star.y + star.h > jimmyObj.y
     ) {
       jimmyObj.blueStar++;
-      ldpModulesAmount.innerText =
-        jimmyObj.greenStar + jimmyObj.blueStar + jimmyObj.blueStar;
+      ldpBlueAmount.innerText = jimmyObj.blueStar;
       blueStars.splice(index, 1);
       if (
         jimmyObj.greenStar >= 3 &&
